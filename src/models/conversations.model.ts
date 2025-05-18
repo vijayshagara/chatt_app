@@ -11,7 +11,7 @@ export class Conversations extends Model {
   public type!: 'private' | 'group';
 
   @Column({ type: DataType.STRING, allowNull: true })
-  public name!: string; // Only needed for group chats
+  public name!: string;
 
   @CreatedAt
   @Column({ type: DataType.DATE })
