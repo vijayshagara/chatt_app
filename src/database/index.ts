@@ -1,4 +1,6 @@
-import Conversations from '../models/conversations';
+import Conversations from '../models/conversations.model';
+import ConversationParticipants from '../models/conversationParticipants.model';
+import Messages from '../models/messages.model';
 import { DB_NAME,DB_HOST,DB_PASSWORD,DB_PORT,DB_USER,NODE_ENV } from '../config';
 import { logger } from '../utils/logger';
 import { Sequelize } from 'sequelize-typescript';
@@ -39,6 +41,8 @@ sequelize.authenticate();
 
 const DB = {
   AuditHistory: sequelize.getRepository(Conversations),
+  Messages: sequelize.getRepository(Messages),
+  ConversationParticipants: sequelize.getRepository(ConversationParticipants),
   sequelize, // connection instance (RAW queries)
   Sequelize, // library
 };
