@@ -22,7 +22,7 @@ class MessageController {
 
   public getMessages = async (ctx: Context, next: Next): Promise<void> => {
     try {
-      const messages = await this.messageService.getMessages();
+      const messages = await this.messageService.getMessages(ctx.query);
       ctx.status = 200;
       ctx.body = { messages, message: 'Messages retrieved successfully' };
     } catch (error: any) {
