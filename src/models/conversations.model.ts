@@ -1,7 +1,7 @@
-import { Column, Model, Default, Table, CreatedAt, UpdatedAt, DataType } from 'sequelize-typescript';
+import { Column, Model, Default, Table, CreatedAt, UpdatedAt, DataType, ForeignKey } from 'sequelize-typescript';
 import { UUIDV4 } from 'sequelize';
 
-@Table({ tableName: 'conversations' })
+@Table({ tableName: 'conversations', timestamps: true })
 export class Conversations extends Model {
   @Default(UUIDV4)
   @Column({ primaryKey: true, type: DataType.UUID })
@@ -14,11 +14,11 @@ export class Conversations extends Model {
   public name!: string;
 
   @CreatedAt
-  @Column({ type: DataType.DATE })
+  @Column({ type: DataType.DATE, field: 'createdAt' })
   public createdAt!: Date;
 
   @UpdatedAt
-  @Column({ type: DataType.DATE })
+  @Column({ type: DataType.DATE, field: 'updatedAt' })
   public updatedAt!: Date;
 }
 

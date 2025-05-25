@@ -1,7 +1,7 @@
 import Conversations from '../models/conversations.model';
 import ConversationParticipants from '../models/conversationParticipants.model';
 import Messages from '../models/messages.model';
-import { DB_NAME,DB_HOST,DB_PASSWORD,DB_PORT,DB_USER,NODE_ENV } from '../config';
+import { DB_NAME, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER, NODE_ENV } from '../config';
 import { logger } from '../utils/logger';
 import { Sequelize } from 'sequelize-typescript';
 
@@ -31,6 +31,10 @@ export const sequelize = new Sequelize(DB_NAME || 'default_db_name', DB_USER || 
   benchmark: true,
   dialectOptions: {
     connectTimeout: 120000,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
   retry: {
     max: 5,
@@ -40,7 +44,7 @@ export const sequelize = new Sequelize(DB_NAME || 'default_db_name', DB_USER || 
 sequelize.authenticate();
 
 const DB = {
-  AuditHistory: sequelize.getRepository(Conversations),
+  Conversations: sequelize.getRepository(Conversations),
   Messages: sequelize.getRepository(Messages),
   ConversationParticipants: sequelize.getRepository(ConversationParticipants),
   sequelize, // connection instance (RAW queries)
